@@ -296,3 +296,56 @@ malloc(int len)
 
 Che succede se len è pari a 4294967295? quanto è lungo il buffer allocato? Il buffer non può avere una grandezza negativa, quindi di fatto verrà allocato uno spazio pari ad esempio a |-2|.
 
+## [Domande Esami] Buffer Overflow
+
+Commenta la sicurezza nei seguenti stralci di codice C relativi alla lettura di una stringa da standard input in cui la lunghezza della stringa è codificata in binario con due bytes all’inizio della stessa.
+
+### Stralcio 1
+```c
+int main(int argc, char** argv) {
+	/* intero di 2 bytes senza segno */
+	unsigned short len;	
+	char buffer*;
+	/* legge l’intero direttamente in binario */
+	read(stdin, &len, 2);
+	buffer = malloc(len+1);
+	read(stdin, buffer, len);
+	/* termina con zero */
+	buffer[len]='\0';
+}
+```
+
+### Soluzione
+In realtà il fatto che questo codice vada in buffer overflow o meno dipende dal tipo di compilatore e di standard C utilizzato. Su standard C99 e superiori non va in buffer overflow. Questo dipende dal fatto che sebbene l'utente possa inserire come valore di len un 65535, nel momento in cui viene fatto len + 1, il risultato non è 0, perché il valore di len viene castato al tipo che accetta malloc, che è un sign_t, con valore di 8 byte.
+
+### Stralcio 2
+```c
+int main(int argc, char **argv) {
+    unsigned short len;
+    char* buffer;
+    read(stdin, &len, 2);
+    if (len >= 65535) {
+        /* gestione errore */
+    }
+    buffer = malloc(len + 1);
+    read(stdin, buffer, len);
+    buffer[len] = '\0';   /*termina con zero*/
+}
+```
+
+### Soluzione 2
+Vedi risposta precedente. Tra l'altro qui viene sollevata un'eccezione già se len è uguale a 65535, quindi anche se non venisse castato il valore, comunque non ci potrebbe essere buffer overflow.
+
+# [2] Vulnerabilità delle reti
+
+## ARP Poisoning (spoofing)
+
+...
+
+### Attacchi MitM
+
+- Passivo (non cambia il contenuto dei pacchetti)
+- Attivo (cambia il contenuto dei pacchetti)
+
+### DOS
+Broadcast storm. 
