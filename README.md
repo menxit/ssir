@@ -365,4 +365,8 @@ Una volta fatto ARP spoofing è possibile fare MitM
 - Attivo (cambia il contenuto dei pacchetti): facile con UDP, difficile con TCP (gestione dei numeri di sequenza)
 
 ## Denial of service
-Può essere fatto o saturando la LAN (difficile), o più facilmente saturando le risorse del calcolatore. Come 
+Può essere fatto o saturando la LAN (difficile), o più facilmente saturando le risorse del calcolatore. Altrimenti si può inibire una sola macchina.. come? Faccio ARP poisoning su tutti gli host e dirotto tutto il traffico sull'host vittima.
+
+## IP address spoofing
+
+
