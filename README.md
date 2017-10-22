@@ -368,5 +368,7 @@ Una volta fatto ARP spoofing è possibile fare MitM
 Può essere fatto o saturando la LAN (difficile), o più facilmente saturando le risorse del calcolatore. Altrimenti si può inibire una sola macchina.. come? Faccio ARP poisoning su tutti gli host e dirotto tutto il traffico sull'host vittima.
 
 ## IP address spoofing
+Significa inviare un pacchetto con indirizzo ip che non corrisponde al nostro. Il problema è che in questo modo non si riceverà la risposta, anche se in realtà è possibile fare ARP spoofing, ovvero è possibile far credere alla vittima, che il mac address dell'indirizzo ip in questione sia quello dell'attaccante.
+
 
 
