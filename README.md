@@ -338,14 +338,31 @@ Vedi risposta precedente. Tra l'altro qui viene sollevata un'eccezione già se l
 
 # [2] Vulnerabilità delle reti
 
-## ARP Poisoning (spoofing)
+## MAC flood e sniffare lan switched
+Sniffare in una lan 10base2 e hubs è molto semplice, mentre nelle reti switched è leggermente più complesso. Un malintenzionato deve inviare una marea di pacchetti contenenti l'associazione del MAC address (mac flood). Questo satura la address table dello switch, che da quel momento in poi si comporta come un hub. A questo punto è possibile sniffare tutti i pacchetti della rete. In realtà questa tecnica è particolarmente invasiva e spesso provoca il crash dello switch.
 
-...
+## ARP Poisoning (spoofing)
+Poinsoning in generale significa alternare una qualche cache/stato. Spoofing significa invece modificare in maniera illecita determinati dati. ARP è un protocollo che permette di associare a un determinato MAC address un determinato indirizzo ip. Esistono due tipi di messaggi ARP:
+
+- ARP request: un host vuole conoscere il mac address di un certo altro host e manda un ARP request. Questa viene mandata in broadcast. L'host che vedendo l'arp request, riconosce il proprio indirizzo ip, risponderà con un ARP reply.
+- ARP reply: invia il proprio MAC address al richiedente.
+
+Il problema è che le ARP request e le ARP reply sono senza stato. Questo significa che se anche un certo host non effettua una ARP request, ma riceve un'ARP reply, esso aggiornerà la sua ARP cache. Un malintenzionato dunque può inviare delle arp reply gratuite, avvelenando la arp cache di un certo host.
+
+Un modo per risolvere il problema sarebbe quello di aver le entry statiche e quindi non far uso di apr request e arp reply, ma la gestione della cosa potrebbe essere particolarmente complessa.
+
+### ARP Poisoning in IPv6
+Il protocollo è sempre stateless e affetto dalle stesse vulnerabilità:
+
+- neighbor solicitation == ARP request
+- neighbor advertisement == ARP reply
+
 
 ### Attacchi MitM
+Una volta fatto ARP spoofing è possibile fare MitM
 
 - Passivo (non cambia il contenuto dei pacchetti)
-- Attivo (cambia il contenuto dei pacchetti)
+- Attivo (cambia il contenuto dei pacchetti): facile con UDP, difficile con TCP (gestione dei numeri di sequenza)
 
-### DOS
-Broadcast storm. 
+## Denial of service
+Può essere fatto o saturando la LAN (difficile), o più facilmente saturando le risorse del calcolatore. Come 
