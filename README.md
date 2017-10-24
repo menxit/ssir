@@ -452,7 +452,8 @@ Decise le contromisure, occorre capire chi sia il responsabile di ciascuna contr
 #### 7. Piano di revisione
 Indica ogni quanto il piano stesso debba essere revisionato e da chi.
 
-### 8. Piano di risposta agli incidenti
+
+#### 8. Piano di risposta agli incidenti
 Stabilisce le procedure in caso di un incidente.
 
 ## Esame 2012-07-18
