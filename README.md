@@ -371,4 +371,112 @@ Può essere fatto o saturando la LAN (difficile), o più facilmente saturando le
 Significa inviare un pacchetto con indirizzo ip che non corrisponde al nostro. Il problema è che in questo modo non si riceverà la risposta, anche se in realtà è possibile fare ARP spoofing, ovvero è possibile far credere alla vittima, che il mac address dell'indirizzo ip in questione sia quello dell'attaccante.
 
 
+## TCP Reset
+È possibile buttare giù una connessione TCP in atto. Basta forgiare un pacchetto TCP con la quadrupla <ip, porta, ip, porta> con il tag RST attivo. Occorre conoscere il numero di sequenza corretto, funziona anche su internet.
 
+## TCP session hijacking
+L'obiettivo è di trasformare una sessione tcp tra A e B in una sessione tra C e B. 
+
+### Fase 1
+Si fa MitM passivo mediante ARP poisoning
+
+### Fase 2
+C fa un TCP reset su A e continua la comunicazione con B utilizzando i successivi numeri di sequenza dei pacchetti TCP. B in questo caso non si accorge del cambiamento, mentre invece A perde la connessione.
+
+## Vulnerabilità del DNS
+DNS non è autenticato quindi è possibile fare sniffing o spoofing. Fare sniffing in questo caso significa vedere quali siti internet sta richiedendo un certo host. Più interessante fare spoofing, ovvero l'host richiede un certo nome, esso viene spoofato dall'attaccante che restituisce (prima del nameserver originale) l'indirizzo ip di un fake server.
+
+
+# [3] Pianificazione della sicurezza
+
+## (observe)-plan-do-check/study
+1. Observe: osserva la condizione corrente
+2. Plan: stabilisci gli obiettivi e le strategie
+3. Do: implementa il piano su piccola scala
+4. Check/study: verifica che tutto funzioni correttamente
+5. Act: azione su larga scala
+
+## Piano di sicurezza
+Il piano di sicurezza è un documento che descrive come l'organizzazione deve affrontare i suoi problemi di sicurezza.
+
+### Perché è importante pianificare?
+È importante fare un piano di sicurezza per poter tracciare degli obiettivi, verificare il reale raggiungimento di questi obiettivi razionalizzando al massimo sia i tempi che i costi.
+
+### Struttura piano di sicurezza
+
+#### 1. Policy
+Dedicato a chi non capisce di sicurezza. Dovrebbe descrivere ad alto livello gli obiettivi di sicurezza, oltre ai tempi e ai soldi necessari.
+
+#### 2. Stato attuale
+Inventario degli asset attuali: dati, utenti, apparecchiature, servizi, eventuali contromisure già esistenti, indicazione delle criticità attualmente presenti.
+
+##### 2.1. Analisi dei rischi
+L'obiettivo dell'analisi dei rischi è quello di ottenere una lista di tutti gli eventuali rischi e ad assegnare a ciascun rischio una valutazione. La valutazione può essere:
+
+- assoluta (ovvero la stima delle perdite $/year) [difficile]
+- relativa (E.G. alto, medio, basso) [più comune]
+
+
+Elementi per valutare un danno:
+
+- impatto
+- probabilità
+- controllabilità o trattabilità
+
+
+Un rischio può essere:
+
+- accettato: non faccio nulla
+- mitigato: contromisure proattive (ridurre le probabilità: E.G. firewall)
+- fronteggiare: contromisure reattive (se si verifica, so come risolvere: E.G. backup)
+- trasferire: se non riesco a mitigare o fronteggiare, trasferisco (E.G. assicurazione)
+- evitare: situazione in cui non posso fare nulla
+
+
+Rischi non mitigabili ad alto impatto:
+
+- disaster recovery
+
+#### 3. Requisiti e vincoli (analisi)
+Specificano cosa dovranno fare i sistemi di sicurezza, senza specificare il come. 
+
+#### 4. Contromisure
+Indica la scelta della contromisura da adottare. La contromisura viene scelta sulla base del costo e dell'efficacia, ovvero effettivamente una contromisura X risolve il problema Y? E se sì, introduce nuovi rischi o no?
+
+#### 5. Piano di rientro (RoadMap)
+Mostra quali attività vanno effettuate prima delle altre e in che tempi devono essere completate. Qui l'ordinamento delle attività può essere basato sia sulla valutazione di un certo rischio (dare precedenza ai rischi più importanti), sia sui tempi necessari per terminare una certa attività.
+
+#### 6. Responsabilità
+Decise le contromisure, occorre capire chi sia il responsabile di ciascuna contromisura. Ad esempio se occorre operare delle cotromisure di sicurezza per il database, il responsabile di quella contromisura sarà il gestore del database.
+
+#### 7. Piano di revisione
+Indica ogni quanto il piano stesso debba essere revisionato e da chi.
+
+### 8. Piano di risposta agli incidenti
+Stabilisce le procedure in caso di un incidente.
+
+## Esame 2012-07-18
+
+1. Supponi di dover far capire al tuo capo (che non si occupa di sicurezza) il valore di un piano di sicurezza, elenca brevemente i punti che metteresti in risalto.
+
+	- rischi e il loro impatto economico
+	- policy (obiettivi, tempi e soldi a livello astratto)
+
+2. Quali sono secondo te delle buone pratiche per progettare le contromisure e per pianificare il loro acquisto/deployment?
+
+	- progetto: considerare i rischi e valutare le soluzioni in quell'ottica, verificando il rischio residuo e il costo per ciascuna soluzione.
+	
+	- acquisti/deployment: la pianificazione dell'acquisto/deployment deve seguire delle priorità che vengono dai rischi, dall'impegno economico previsto e dal tempo che si prevede si impegherà a fare deployment di una certa soluzione. Soluzioni rapide ed economiche si deployano subito. Soluzioni costose e complesse prevedono progetti pilota. Nel progetto, si dovrebbe cercare di avvantaggiare le soluzioni rapide ed economiche a quelle complesse. Se si punta ad una soluzione complessa può aver senso avere una soluzione temporanea rapida che riduca il rischio mentre si fa il deploy della soluzione definitiva.
+
+## Esame 2014-07-18
+
+1. Perché è importante avere un piano di sicurezza?
+
+È importante avere un piano di sicurezza perché permette di definire in maniera precisa degli obiettivi di sicurezza e come raggiungere, in modo tale da razionalizzare tempi e costi necessari per attuarli. Ad esempio, è inutile prevedere spendere soldi per prevedere un disaster recovery, se prima non sono stati risolti dei rischi più probabili e più economici da risolvere. Mediante un piano di sicurezza questo genere di problemi può essere superato.
+
+2. Quali sono gli obiettivi dell'analisi del rischio
+
+L'obiettivo dell'analisi del rischio è quella di determinare asset, dati o servizi da mettere in sicurezza, delineando per ciascuno di essi l'elenco dei possibili rischi, valutando per ciascun rischio il suo livello di "rischiosità". Questa valutazione può essere:
+
+- oggettiva: costo annuo che comporta un certo rischio; quasi mai si riesce a ottenere, perché non è possibile prevedere facilmente l'impatto che un certo evento possa avere
+- relativo: è un giudizio relativo, ad esempio alto, medio o basso che indica in maniera astratta il livello di "rischiosità" di un certo rischio.
