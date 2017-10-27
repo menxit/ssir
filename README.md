@@ -482,7 +482,7 @@ L'obiettivo dell'analisi del rischio è quella di determinare asset, dati o serv
 - oggettiva: costo annuo che comporta un certo rischio; quasi mai si riesce a ottenere, perché non è possibile prevedere facilmente l'impatto che un certo evento possa avere
 - relativo: è un giudizio relativo, ad esempio alto, medio o basso che indica in maniera astratta il livello di "rischiosità" di un certo rischio.
 
-# [3] Principi di progettazione
+# [4] Principi di progettazione
 
 ## Minimalità dei diritti
 Ad un soggetto devono essere assegnati solo i diritti minimi:
@@ -515,3 +515,38 @@ Meglio avere servizi su sistemi diversi. Ad esempio, invece di avere solo firewa
 
 ## Compromesso
 Queste qualità sono in conflitto tra di loro, dunque occorre trovare un giusto compromesso.
+
+
+# [5] Modelli
+
+AAA, confinamento, DAC, MAC, access control matrix
+
+## AAA
+AAA è un primo modello (Authentication, Authorization, Accounting). Nato in ambito telecomunicazioni con scopi non di sicurezza. Questo protocollo descrive quali sono gli elementi necessari.
+
+- Authentication: inserisci la password
+- Authorization: accesso al servizio
+- Accounting ~= Auditing (log): registrare che hai usato un certo servizio, non solo.
+
+### Autenticazione
+...
+
+### Autorizzazione
+
+- Richiesta di accesso (l'utente richiede l'accesso su un certo oggetto)
+- Controllo di accesso (access control, si basa su delle regole)
+- Autorizzazione (allow/deny)
+
+### Auditing
+
+Verifica offline sul fatto che il sistema si sia comportato realmente come avrebbe dovuto. L'auditing può esser fatto sugli accessi, sulla sicurezza del sistema, del network ecc..
+
+	
+## Reference monitor (security kernel)
+Nato in ambito militare per semplificare la certificazione dei sistemi. Maggiormente relativo ai sistemi operativi. Il reference monitor è il pezzo del sistema operativo che effettua il controllo di accesso. Caratteristiche:
+
+- invocato a ogni richiesta di accesso (mediazione completa)
+- idealmente a prova di intrusione (senza vulnerabilità)
+- abbastanza semplice da essere verificabile (poco codice)
+
+
