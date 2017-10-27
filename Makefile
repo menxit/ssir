@@ -1,2 +1,2 @@
 pdf:
-	pandoc README.md --latex-engine=xelatex -s -o README.pdf
+	pandoc  --latex-engine=xelatex --toc -s -o README.pdf README.md

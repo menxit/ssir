@@ -481,3 +481,37 @@ L'obiettivo dell'analisi del rischio è quella di determinare asset, dati o serv
 
 - oggettiva: costo annuo che comporta un certo rischio; quasi mai si riesce a ottenere, perché non è possibile prevedere facilmente l'impatto che un certo evento possa avere
 - relativo: è un giudizio relativo, ad esempio alto, medio o basso che indica in maniera astratta il livello di "rischiosità" di un certo rischio.
+
+# [3] Principi di progettazione
+
+## Minimalità dei diritti
+Ad un soggetto devono essere assegnati solo i diritti minimi:
+
+- diritti non necessari non vengono concessi
+- diritti dati solo per il tempo necessario
+
+Altra best practice in quest'ambito è quello di dare il diritto non tanto sulla base dell'identità, ma sulla base del ruolo, RBAC (Role Based Access Control).
+
+## Default sicuri
+Le configurazioni di default devono essere sicure. Ad esempio, nell'ambito di un firewall, la configurazione di default dovrebbe essere quella di chiudere tutto, o meglio chiudere "abbastanza".
+
+## Progetto aperto
+La sicurezza non deve dipendere dalla segretezza dell'implementazione. La segretezza non deve stare nell'implementazione, ma in un elemento esterno, detto chiave (crittografia). Se il progetto è fatto male, è meglio tenerlo segreto.
+
+## Isolamento / Confinamento
+Minimizzare la condivisione di risorse tra soggetti, in particolare se appartengono ad una diversa classe di sicurezza. Di chi è la responsabilità? Ad esempio, due dipartimenti. Ciascun dipartimento ha il suo esperto di sicurezza.
+
+## Mediazione completa
+Reference monitor. Effettuare il controllo ad ogni accesso.
+
+## Defence in depth
+Richiedere il consenso di più entità per ottenere l'accesso. Più meccanismi di difesa assieme sono più difficili da forzare.
+
+## Usabilità
+Meccanismi e politiche di sicurezza non devono aggiungere difficoltà all'accesso alle risorse da parte degli utenti. Questo perché l'utente si può rifiutare di usare il sistema dotato di quella contromisura.
+
+## Eterogeneità
+Meglio avere servizi su sistemi diversi. Ad esempio, invece di avere solo firewall della stessa azienda, meglio avere firewall di aziende diverse.
+
+## Compromesso
+Queste qualità sono in conflitto tra di loro, dunque occorre trovare un giusto compromesso.
